@@ -16,7 +16,7 @@ func recursive (string1, string2 string) float64{
 	if (len(string2) == 0) &&  (len(string1) == 0) {
 		return 0.0
 	}
-	
+
 	mismatch_1 := recursive(string1, string2[0:len(string2) -1]) + 1.0
 	mismatch_2 := recursive(string1[0:len(string1) -1], string2 ) + 1.0
 
@@ -32,8 +32,7 @@ func recursive (string1, string2 string) float64{
 }
 
 func main(){
-
-	str1 := "shakespeare"
-	str2 := "shakespare"
+	str1 := "executed"
+	str2 := "executed"
 	fmt.Println(recursive(str1, str2))
 }
