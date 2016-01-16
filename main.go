@@ -1,11 +1,10 @@
+// go vs python vs C++ comparison?
 package main
 
 import "fmt"
 import "math"
 
 func recursive (string1, string2 string) float64{
-//	fmt.Println(string1)
-//	fmt.Println(string2)
 	if (len(string1) == 0) {
 		return float64(len(string2))
 	}
@@ -34,7 +33,7 @@ func recursive (string1, string2 string) float64{
 
 func main(){
 
-	str1 := "abcdefghijklm"
-	str2 := "abcdefghijklm"
+	str1 := "shakespeare"
+	str2 := "shakespare"
 	fmt.Println(recursive(str1, str2))
 }
