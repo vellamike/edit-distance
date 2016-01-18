@@ -29,7 +29,7 @@ func dynamic(string1, string2 string) float64 {
 
 	// Outer loop loops over rows
 	for j := 1; j < len(table); j++ { // row index
-		Inner loop loops over columns
+		//Inner loop loops over columns
 		for i := 1; i < len(table[j]); i++ {
 			char1 := string1[j-1]
 			char2 := string2[i-1]
