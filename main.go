@@ -26,6 +26,7 @@ func dynamic(string1, string2 string) float64 {
 		table[i] = make([]alignment_position, y)
 	}
 
+	// Step 1: set up the first row
 	for i, row := range table {
 		row[0] = alignment_position{&table[0][0], "L", float64(i)}
 	}
@@ -81,6 +82,7 @@ func recursive(string1, string2 string) float64 {
 }
 
 func main() {
+	// create two example strings, calculate the edit distance between them
 	str1 := "exciting"
 	str2 := "executed"
 	t0 := time.Now()
