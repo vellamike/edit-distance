@@ -11,25 +11,26 @@ func print_table(t [][]float64) {
 	}
 }
 
+type alignment_position struct {
+	parent        *alignment_position
+	direction     string
+	edit_distance float64
+}
+
 func dynamic(string1, string2 string) float64 {
 	x := len(string1) + 1
 	y := len(string2) + 1
-	table := make([][]float64, x)
+	table := make([][]alignment_position, x)
+
 	for i := 0; i < x; i++ {
-		table[i] = make([]float64, y)
+		table[i] = make([]alignment_position, y)
 	}
 
-	// Step 1: set up the first row
 	for i, row := range table {
-		row[0] = float64(i)
-	}
-	// Step 2: set up the first column
-	for i, _ := range table[0] {
-		table[0][i] = float64(i)
+		row[0] = alignment_position{&table[0][0], "L", float64(i)}
 	}
 
-	// populate row1
-	for j := 1; j < len(table); j++ { // row index
+	for j := 1; j < len(table); j++ {
 		for i := 1; i < len(table[j]); i++ {
 			char1 := string1[j-1]
 			char2 := string2[i-1]
@@ -39,17 +40,17 @@ func dynamic(string1, string2 string) float64 {
 				mismatch_score = 0.0
 			}
 
-			diag := table[j-1][i-1]
-			left := table[j][i-1]
-			up := table[j-1][i]
+			diag := table[j-1][i-1].edit_distance
+			left := table[j][i-1].edit_distance
+			up := table[j-1][i].edit_distance
 
-			table[j][i] = math.Min(math.Min(mismatch_score+diag, up+1.0), left+1.0)
-
+			edit_distance := math.Min(math.Min(mismatch_score+diag, up+1.0), left+1.0)
+			table[j][i] = alignment_position{&table[0][0], "L", edit_distance}
 		}
 	}
+
 	fmt.Println("Edit distance table:")
-	print_table(table)
-	return table[x-1][y-1]
+	return table[x-1][y-1].edit_distance
 }
 
 func recursive(string1, string2 string) float64 {
